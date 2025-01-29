@@ -30,7 +30,7 @@ it a hint through  the boot parameters - where the root  FS lies and its
 type:
 
 ```
-root=/dev/nvme0n1p3 rootfstype=ext4
+root=/dev/nvme0n1p3 rootfstype=ext4 resume=/dev/nvme0n1p4
 ```
 
 Instead  of dev  path we  can use  UUIDs, but  I find  this easier  as I
