@@ -23,12 +23,16 @@ config:
 	cd ${SRC} && make -j${NPROC} nconfig
 	$(MAKE) get-config
 
-install:
+install: install-modules install-grub install-efi
+
+install-modules:
 	sudo dkms unbuild -k 6.6.74-a1466 -m facetimehd/0.1 --force
 	sudo dkms unbuild -k 6.6.74-a1466 -m broadcom-sta/6.30.223.271 --force
 	sudo rm -rf /lib/modules/${VERSION}-${SUFFIX}
 	cd ${SRC} && sudo make -j${NPROC} modules_install
 	sudo dkms autoinstall -k ${VERSION}-${SUFFIX}
+
+install-grub:
 	sudo cp ${SRC}/arch/x86/boot/bzImage /boot/vmlinuz-${VERSION}-${SUFFIX}-amd64
 	sudo update-grub
 
